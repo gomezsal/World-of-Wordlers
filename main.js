@@ -1,5 +1,4 @@
 const API_URL = 'https://api.sheetbest.com/sheets/ce0564ef-26d7-408e-9805-d4f94db6853c';
-const API_ENDPOINT = '/api/sheets';
 const SHEET_DB_API = 'https://sheetdb.io/api/v1/lswvipyoqoppy';
 
 // Auto-refresh interval (5 minutes)
@@ -7,8 +6,6 @@ const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000;
 let autoRefreshTimeout;
 
 // DOM elements
-const leagueSelect = document.getElementById('leagueSelect');
-const loadTeamsBtn = document.getElementById('loadTeamsBtn');
 const loading = document.getElementById('loading');
 const main = document.querySelector('main');
 const navBtns = document.querySelectorAll('.nav-btn');
@@ -52,16 +49,6 @@ function displayTeams(teams) {
     `).join('');
 }
 
-// Event listeners
-loadTeamsBtn.addEventListener('click', () => {
-    const selectedLeague = leagueSelect.value;
-    if (selectedLeague) {
-        fetchTeams(selectedLeague);
-    } else {
-        alert('Please select a league first');
-    }
-});
-
 // Navigation handling
 navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -82,7 +69,7 @@ async function fetchFormResponses() {
     loadingDiv.style.display = 'block';
     
     try {
-        const response = await fetch(API_ENDPOINT);
+        const response = await fetch(API_URL);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         
         const data = await response.json();
@@ -242,9 +229,10 @@ function updateStrategiesList(strategies) {
 }
 
 // Event listeners
-document.getElementById('refreshDataBtn')?.addEventListener('click', () => {
-    fetchFormResponses();
-});
+const refreshDataBtn = document.getElementById('refreshDataBtn');
+if (refreshDataBtn) {
+    refreshDataBtn.addEventListener('click', fetchFormResponses);
+}
 
 // Load data on page load
 document.addEventListener('DOMContentLoaded', () => {
