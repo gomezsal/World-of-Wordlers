@@ -1,34 +1,27 @@
-import { google } from 'googleapis';
-
-const sheets = google.sheets('v4');
+const SHEET_DB_API = process.env.SHEETDB_API_URL;
 
 export default async function handler(req, res) {
-    const SHEET_ID = '1Iet_bH8mKKdFXNclf-nFGlFpcKSZt-zWUm7wu9a-Snk';
-    const RANGE = 'Form Responses 1!A:E'; // Adjust based on your sheet name
+    if (req.method !== 'GET') {
+        return res.status(405).json({ error: 'Method not allowed' });
+    }
 
     try {
-        const auth = new google.auth.GoogleAuth({
-            credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT),
-            scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-        });
+        if (!SHEET_DB_API) {
+            return res.status(500).json({ error: 'SheetDB API URL not configured' });
+        }
 
-        const response = await sheets.spreadsheets.values.get({
-            auth,
-            spreadsheetId: SHEET_ID,
-            range: RANGE,
-        });
+        const response = await fetch(SHEET_DB_API);
+        if (!response.ok) {
+            throw new Error(`SheetDB API error: ${response.status}`);
+        }
 
-        const rows = response.data.values || [];
-        const headers = rows[0];
-        const data = rows.slice(1).map(row => ({
-            goToWord: row[1] || '',
-            hasStrategy: row[2] || '',
-            strategy: row[3] || '',
-            attempts: parseInt(row[4]) || 0,
-        }));
-
-        res.status(200).json({ data });
+        const data = await response.json();
+        
+        // Cache for 5 minutes
+        res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=600');
+        return res.status(200).json(data);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error fetching SheetDB data:', error);
+        return res.status(500).json({ error: error.message });
     }
 }

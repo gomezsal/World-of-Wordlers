@@ -2,6 +2,10 @@ const API_URL = 'https://api.sheetbest.com/sheets/ce0564ef-26d7-408e-9805-d4f94d
 const API_ENDPOINT = '/api/sheets';
 const SHEET_DB_API = 'https://sheetdb.io/api/v1/lswvipyoqoppy';
 
+// Auto-refresh interval (5 minutes)
+const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000;
+let autoRefreshTimeout;
+
 // DOM elements
 const leagueSelect = document.getElementById('leagueSelect');
 const loadTeamsBtn = document.getElementById('loadTeamsBtn');
@@ -78,7 +82,7 @@ async function fetchFormResponses() {
     loadingDiv.style.display = 'block';
     
     try {
-        const response = await fetch(SHEET_DB_API);
+        const response = await fetch(API_ENDPOINT);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         
         const data = await response.json();
@@ -89,13 +93,23 @@ async function fetchFormResponses() {
         }
         
         processFormData(data);
+        scheduleNextRefresh();
     } catch (error) {
         console.error('Error fetching data:', error);
         document.getElementById('strategiesList').innerHTML = 
             `<p class="error">Error loading data: ${error.message}</p>`;
+        scheduleNextRefresh();
     } finally {
         loadingDiv.style.display = 'none';
     }
+}
+
+function scheduleNextRefresh() {
+    clearTimeout(autoRefreshTimeout);
+    autoRefreshTimeout = setTimeout(() => {
+        console.log('Auto-refreshing data...');
+        fetchFormResponses();
+    }, AUTO_REFRESH_INTERVAL);
 }
 
 function processFormData(data) {
@@ -228,9 +242,17 @@ function updateStrategiesList(strategies) {
 }
 
 // Event listeners
-document.getElementById('refreshDataBtn')?.addEventListener('click', fetchFormResponses);
+document.getElementById('refreshDataBtn')?.addEventListener('click', () => {
+    fetchFormResponses();
+});
 
 // Load data on page load
 document.addEventListener('DOMContentLoaded', () => {
     fetchFormResponses();
+    scheduleNextRefresh();
+});
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    clearTimeout(autoRefreshTimeout);
 });

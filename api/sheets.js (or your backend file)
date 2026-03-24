@@ -1,0 +1,4 @@
+// Remove or comment out any code using GOOGLE_SERVICE_ACCOUNT
+// If you need it, add it as an environment variable in Vercel settings
+
+// If you don't need Google authentication, delete this file or the problematic code
