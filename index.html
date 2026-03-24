@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>League Lens</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/qvx3vuo.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav>
+        <button class="nav-btn active" data-section="home">Home</button>
+        <button class="nav-btn" data-section="favourites">Favourites</button>
+    </nav>
+    <header>
+        <h1>Wordle Strategies Dashboard</h1>
+    </header>
+
+    <div class="controls">
+        <select id="leagueSelect">
+            <option value="">Select a League</option>
+            <option value="La Liga">La Liga (Spain)</option>
+            <option value="Premier League">Premier League (England)</option>
+            <option value="Bundesliga">Bundesliga (Germany)</option>
+            <option value="Serie A">Serie A (Italy)</option>
+            <option value="Ligue 1">Ligue 1 (France)</option>
+        </select>
+        <button id="loadTeamsBtn">SEARCH TEAM</button>
+        <button id="refreshDataBtn">REFRESH DATA</button>
+    </div>
+
+    <main>
+        <div id="loading" class="loading" style="display: none;">
+            Loading data from Google Forms...
+        </div>
+
+        <section id="go-to-words" class="dashboard-section">
+            <h2>Popular Go-To Words</h2>
+            <div id="wordsChart"></div>
+            <div id="wordsList"></div>
+        </section>
+
+        <section id="attempts-stats" class="dashboard-section">
+            <h2>Attempts Distribution</h2>
+            <div id="attemptsChart"></div>
+        </section>
+
+        <section id="strategies" class="dashboard-section">
+            <h2>Community Strategies</h2>
+            <div id="strategiesList"></div>
+        </section>
+    </main>
+
+    <script src="./main.js" type="module"></script>
+</body>
+</html>
