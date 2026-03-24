@@ -2,7 +2,6 @@
     "buildCommand": "npm run build",
     "outputDirectory": "public",
     "env": {
-        "GOOGLE_SERVICE_ACCOUNT": "@google_service_account",
         "SHEETDB_API_URL": "@sheetdb_api_url"
     }
 }
