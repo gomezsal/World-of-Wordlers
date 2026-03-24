@@ -2,6 +2,7 @@
     "buildCommand": "npm run build",
     "outputDirectory": "public",
     "env": {
-        "SHEETDB_API_URL": "@SHEETDB_API_URL"
+        "SHEETDB_API_URL": "SHEETDB_API_URL"
+     
     }
 }
