@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>League Lens</title>
+    <title>Wordle Strategies Dashboard</title>
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -16,7 +16,6 @@
     </header>
 
     <div class="controls">
-  
         <button id="refreshDataBtn">REFRESH DATA</button>
     </div>
 
@@ -27,17 +26,16 @@
 
         <section id="go-to-words" class="dashboard-section">
             <h2>Popular Go-To Words</h2>
-            <div id="wordsChart"></div>
-            <div id="wordsList"></div>
+            <div id="goToWordsContainer"></div>
         </section>
 
-        <section id="attempts-stats" class="dashboard-section">
-            <h2>Attempts Distribution</h2>
-            <div id="attemptsChart"></div>
+        <section id="playing-times" class="dashboard-section">
+            <h2>At what time are people playing wordle?</h2>
+            <div id="timesChart"></div>
         </section>
 
         <section id="strategies" class="dashboard-section">
-            <h2>Community Strategies</h2>
+            <h2>Learn a new Strategy</h2>
             <div id="strategiesList"></div>
         </section>
     </main>
