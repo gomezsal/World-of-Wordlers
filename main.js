@@ -100,16 +100,16 @@ function processFormData(data) {
                 if (!isNaN(attempts)) {
                     if (attempts >= 1 && attempts <= 2) {
                         attemptKey = '1-2';
-                        displayAttempts = attempts;
+                        displayAttempts = '1 - 2';
                     } else if (attempts >= 3 && attempts <= 4) {
                         attemptKey = '3-4';
-                        displayAttempts = attempts;
+                        displayAttempts = '3 - 4';
                     } else if (attempts >= 5 && attempts <= 6) {
                         attemptKey = '5-6';
-                        displayAttempts = attempts;
+                        displayAttempts = '5 - 6';
                     } else if (attempts > 6) {
                         attemptKey = 'never';
-                        displayAttempts = attempts;
+                        displayAttempts = 'I don\'t usually get the word';
                     }
                 }
             }
@@ -339,11 +339,11 @@ function displayStrategies(strategies) {
                     <div class="word-display">
                         ${item.word.split('').map(letter => `<div class="word-letter">${letter}</div>`).join('')}
                     </div>
+                    ${item.strategy ? `<div class="strategy-text">"${item.strategy}"</div>` : ''}
                     <div class="wordle-grid">
                         ${gridHTML}
                     </div>
                 </div>
-                ${item.strategy ? `<div class="strategy-text">"${item.strategy}"</div>` : ''}
             </div>
         `;
     }).join('');
@@ -373,8 +373,8 @@ function createWordleGrid(attemptKey) {
             whiteRows = [4, 5];
             break;
         case '5-6':
-            // Top 4 rows white, bottom 2 rows green
-            whiteRows = [0, 1, 2, 3];
+            // Top 4 rows gray, bottom 2 rows green
+            grayRows = [0, 1, 2, 3];
             greenRows = [4, 5];
             break;
         case 'never':
