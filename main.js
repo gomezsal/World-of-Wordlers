@@ -104,22 +104,22 @@ function processFormData(data) {
     const strategies = [];
     
     data.forEach(row => {
-        // Adjust column names to match your Google Form
-        const word = row['What is your go to word'];
-        const hasStrategy = row['Do you have an Strategy'];
-        const strategy = row['If you answered yes, what is it'];
-        const attemptCount = parseInt(row['How many attempts does it usually take you to get the word on average']);
+        // Use exact column names from your Google Form
+        const word = row['What is your go to word?']; // Note: added question mark
+        const hasStrategy = row['Do you have an Strategy?']; // Note: added question mark
+        const strategy = row['If you answered yes, what is it?']; // Note: added question mark
+        const attemptCount = parseInt(row['How many attempts does it usually take you to get the word on average?']); // Note: added question mark
         
-        if (word) {
-            goToWords[word] = (goToWords[word] || 0) + 1;
+        if (word && word.trim()) {
+            goToWords[word.trim()] = (goToWords[word.trim()] || 0) + 1;
         }
         
-        if (!isNaN(attemptCount)) {
+        if (!isNaN(attemptCount) && attemptCount > 0) {
             attempts.push(attemptCount);
         }
         
-        if (hasStrategy === 'Yes' && strategy) {
-            strategies.push(strategy);
+        if ((hasStrategy === 'Yes' || hasStrategy === 'yes') && strategy && strategy.trim()) {
+            strategies.push(strategy.trim());
         }
     });
     

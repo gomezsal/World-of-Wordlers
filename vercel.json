@@ -1,6 +1,5 @@
-
 {
-    "buildCommand": "npm run build",
+    "buildCommand": "echo 'Static site, no build needed'",
     "outputDirectory": ".",
     "env": {
         "GOOGLE_SERVICE_ACCOUNT": "@google_service_account"
