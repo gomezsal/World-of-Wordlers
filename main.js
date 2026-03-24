@@ -114,7 +114,8 @@ function processFormData(data) {
                 }
             }
             
-            const strategyText = (hasStrategy && hasStrategy.toLowerCase() === 'yes' && strategy) 
+            // Capture strategy if it exists (with or without "yes" answer to the strategy question)
+            const strategyText = (strategy && strategy.trim() !== '') 
                 ? strategy.trim() 
                 : '';
             
@@ -132,6 +133,12 @@ function processFormData(data) {
     console.log('Playing times object:', playingTimes);
     console.log('Go-to words object:', goToWords);
     console.log('Strategies by attempts:', strategiesByAttempts);
+    console.log('Total strategies collected:', 
+        strategiesByAttempts['1-2'].length + 
+        strategiesByAttempts['3-4'].length + 
+        strategiesByAttempts['5-6'].length + 
+        strategiesByAttempts['never'].length
+    );
     
     updateVisualizations(goToWords, playingTimes, strategiesByAttempts);
 }
@@ -362,9 +369,9 @@ function createWordleGrid(attemptKey) {
     
     switch(attemptKey) {
         case '1-2':
-            // Bottom 2 rows green, rest white
-            greenRows = [4, 5];
+            // Only bottom 2 rows green, rest white
             whiteRows = [0, 1, 2, 3];
+            greenRows = [4, 5];
             break;
         case '3-4':
             // Top 2 rows gray, next 2 rows green, last 2 white
