@@ -181,11 +181,21 @@ function updateGoToWordsDisplay(goToWords) {
         ).join('');
         
         return `
-            <div class="word-tiles-row">
+            <div class="word-tiles-row" data-count="${count}" data-word="${word}" title="${count} person${count !== 1 ? 's' : ''} use this word">
                 ${lettersHTML}
             </div>
         `;
     }).join('');
+    
+    // Add hover event listeners to show tooltip
+    const wordRows = container.querySelectorAll('.word-tiles-row');
+    wordRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            const count = this.getAttribute('data-count');
+            const word = this.getAttribute('data-word');
+            this.setAttribute('title', `${count} person${count !== 1 ? 's' : ''} use${count !== 1 ? '' : 's'} this word`);
+        });
+    });
 }
 
 // Get color based on frequency (green > yellow > grey > white)
