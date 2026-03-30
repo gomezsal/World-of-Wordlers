@@ -2,39 +2,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle Strategies Dashboard</title>
+    <title>A World of Wordlers</title>
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Wordle Strategies Dashboard</h1>
+    <header class="main-header">
+        <h1>A World of Wordlers</h1>
     </header>
 
-    <div class="controls">
-        <button id="refreshDataBtn">REFRESH DATA</button>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <section class="sidebar-section">
+                <h2>Top Go-to Words</h2>
+                <p class="section-description">Find out what are the most famous first words among wordlers, hover over them to see how many people use them!</p>
+                <div id="goToWordsContainer" class="words-display"></div>
+            </section>
+
+            <section class="sidebar-section">
+                <h2>Usage</h2>
+                <p class="section-description">When are wordlers most active during the day? This chart shows at what time most wordlers are trying to solve the puzzle.</p>
+                <div id="timesChart" class="chart-container"></div>
+            </section>
+        </aside>
+
+        <!-- Right Content -->
+        <main class="main-content">
+            <section id="strategies" class="strategies-section">
+                <h2>Strategies</h2>
+                <p class="section-description">Filter by number of attempts</p>
+                <div id="strategiesList" class="strategies-container"></div>
+            </section>
+        </main>
     </div>
 
-    <main>
-        <div id="loading" class="loading" style="display: none;">
-            Loading data from Google Forms...
-        </div>
+    <div id="loading" class="loading" style="display: none;">
+        Loading data from Google Forms...
+    </div>
 
-        <section id="go-to-words" class="dashboard-section">
-            <h2>Popular Go-To Words</h2>
-            <div id="goToWordsContainer"></div>
-        </section>
-
-        <section id="playing-times" class="dashboard-section">
-            <h2>At what time are people playing wordle?</h2>
-            <div id="timesChart"></div>
-        </section>
-
-        <section id="strategies" class="dashboard-section">
-            <h2>Learn a new Strategy</h2>
-            <div id="strategiesList"></div>
-        </section>
-    </main>
+    <button id="refreshDataBtn" class="refresh-btn">REFRESH DATA</button>
 
     <script src="./main.js" type="module"></script>
 </body>

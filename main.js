@@ -60,7 +60,16 @@ function processFormData(data) {
         "I don't have a specific time to play": "Any time"
     };
     
-    data.forEach(row => {
+    // DEBUG: Show all available column names from first row
+    if (data.length > 0) {
+        console.log('Available columns in Google Sheet:', Object.keys(data[0]));
+    }
+    
+    data.forEach((row, index) => {
+        // DEBUG: Log first row completely to see all values
+        if (index === 0) {
+            console.log('First row data:', row);
+        }
         // Extract go-to words
         const word = row['What is your go to word (the first word you put into Wordle)?'];
         if (word && word.trim()) {
