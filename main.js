@@ -296,6 +296,12 @@ function initializeStrategiesSection(strategiesByAttempts) {
     const strategiesSection = document.getElementById('strategies');
     if (!strategiesSection) return;
     
+    // Remove existing filter container if it exists
+    const existingFilters = strategiesSection.querySelector('.attempt-filters');
+    if (existingFilters) {
+        existingFilters.remove();
+    }
+    
     // Create filter buttons
     const filterContainer = document.createElement('div');
     filterContainer.className = 'attempt-filters';
