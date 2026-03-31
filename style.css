@@ -235,7 +235,7 @@ body {
     line-height: 1.4;
     padding: 10px;
     background-color: #f0f0f0;
-    border-left: 3px solid #007bff;
+    border-left: 3px solid #000;
     border-radius: 4px;
     margin: 8px 0;
     word-wrap: break-word;
@@ -283,7 +283,7 @@ body {
 .loading {
     padding: 20px;
     background-color: #e3f2fd;
-    color: #1976d2;
+    color: #1f9132;
     border-radius: 6px;
     text-align: center;
     margin-bottom: 20px;
@@ -303,21 +303,21 @@ body {
     bottom: 30px;
     right: 30px;
     padding: 12px 24px;
-    background-color: #007bff;
+    background-color: #000;
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
     font-size: 13px;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 255, 17, 0.3);
     transition: all 0.3s ease;
     z-index: 100;
 }
 
 .refresh-btn:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+    background-color: #39b300;
+    box-shadow: 0 4px 12px #3de40066;
 }
 
 /* Responsive Design */
