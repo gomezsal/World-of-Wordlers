@@ -1,8 +1,9 @@
+// Code created with the use of Claude AI model Haiku 4.5 .https://claude.ai/share/568fd5af-f76a-43a2-9eb3-c885193072d1//
 const API_URL = 'https://api.sheetbest.com/sheets/ce0564ef-26d7-408e-9805-d4f94db6853c';
 
 // Auto-refresh interval (5 minutes)
 const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000;
-let autoRefreshTimeout;
+let autoRefreshTimeout; 
 
 // DOM elements
 const loading = document.getElementById('loading');
